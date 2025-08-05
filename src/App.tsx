@@ -21,7 +21,7 @@ const Home: React.FC = () => (
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.8, ease: "easeOut" }}
 >
-  <img src="/public/logo.png" alt="Software Design UK Logo" className="mx-auto h-60 mb-6" />
+  <img src="/logo.png" alt="Software Design UK Logo" className="mx-auto h-60 mb-6" />
   <h1 className="text-4xl font-bold text-gray-800 mb-2">Software Design UK</h1>
   <p className="text-lg text-gray-600 max-w-xl mx-auto">
     Practical insights and commentary on system design, cloud computing, AI in analysis & design,
@@ -87,7 +87,7 @@ const App: React.FC = () => (
       <header className="p-4 bg-white border-b mb-4">
         <nav className="flex justify-between items-center">
           <Link to="/">
-            <img src="/public/logo.png" alt="Logo" className="h-20" />
+            <img src="/logo.png" alt="Logo" className="h-20" />
           </Link>
           <ul className="flex space-x-4 text-lg font-medium">
             <li><Link to="/" className="text-gray-700 hover:text-blue-600">Home</Link></li>
