@@ -1,106 +1,132 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Link, useParams } from "react-router-dom";
-import { posts } from "./data/posts";
-import { motion } from "framer-motion";
+import { Card } from "@/components/ui/card";
 
-
-// Define the structure of a blog post
-type PostType = {
+export type PostType = {
   id: string;
   title: string;
   excerpt: string;
   content: string;
 };
 
-// Home page displaying intro and posts
+export const posts: PostType[] = [
+  {
+    id: "poor-system-boundaries",
+    title: "The Cost of Poor System Boundaries",
+    excerpt:
+      "Explores the long-term consequences of loosely defined service boundaries, from tight coupling to brittle systems.",
+    content: "<p>Coming soon...</p>"
+  },
+  {
+    id: "evolutionary-architecture",
+    title: "Designing for Change: Evolutionary Architecture in Practice",
+    excerpt:
+      "An introduction to evolutionary architecture and how to apply it in real-world environments with continuous change.",
+    content: "<p>Coming soon...</p>"
+  },
+  {
+    id: "what-makes-good-architecture",
+    title: "What Makes an Architecture ‘Good’?",
+    excerpt:
+      "Breaks down the key qualities of successful architecture — modifiability, scalability, performance, and more.",
+    content: "<p>Coming soon...</p>"
+  },
+  {
+    id: "cloud-native-vs-hosted",
+    title: "Cloud-Native != Just Moving to the Cloud",
+    excerpt:
+      "Clarifies the difference between hosting in the cloud and building cloud-native systems using autoscaling, resilience, and statelessness.",
+    content: "<p>Coming soon...</p>"
+  },
+  {
+    id: "when-to-use-serverless",
+    title: "When to Use Serverless — and When Not To",
+    excerpt:
+      "Examines use cases where serverless architecture shines and situations where it might cause more trouble than it's worth.",
+    content: "<p>Coming soon...</p>"
+  },
+  {
+    id: "ai-requirements-gathering",
+    title: "AI-Assisted Requirements Gathering: Blessing or Curse?",
+    excerpt:
+      "Share pros and cons of using AI tools to help draft stories, models, and requirements in the early analysis stages.",
+    content: "<p>Coming soon...</p>"
+  },
+  {
+    id: "prompt-engineering-analysts",
+    title: "Prompt Engineering for Analysts: A Practical Primer",
+    excerpt:
+      "Tips for writing prompts that generate clear, actionable, and usable output for design and documentation tasks.",
+    content: "<p>Coming soon...</p>"
+  },
+  {
+    id: "ai-validate-business-rules",
+    title: "Using AI to Validate Business Rules",
+    excerpt:
+      "An exploration of how LLMs can assist in checking consistency, coverage, and logic in sets of business rules.",
+    content: "<p>Coming soon...</p>"
+  },
+  {
+    id: "modern-tech-docs",
+    title: "Modern Technical Documentation: Beyond Word and PDF",
+    excerpt:
+      "Explores modern documentation formats and tools such as Markdown, GitBook, and docs-as-code workflows.",
+    content: "<p>Coming soon...</p>"
+  },
+  {
+    id: "docs-for-devs-vs-stakeholders",
+    title: "Writing for Developers vs. Writing for Stakeholders",
+    excerpt:
+      "How to tailor content, language, and structure to different audiences without duplicating effort.",
+    content: "<p>Coming soon...</p>"
+  },
+  {
+    id: "fix-your-system-diagrams",
+    title: "Why Your System Diagrams Don’t Work — and How to Fix Them",
+    excerpt:
+      "Common pitfalls in system diagramming and how to apply visual hierarchy and consistent notation.",
+    content: "<p>Coming soon...</p>"
+  }
+];
+
 const Home: React.FC = () => (
-  <main className="p-4">
-  <motion.section
-  className="bg-gray-50 rounded-xl p-8 mb-8 text-center shadow-sm"
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, ease: "easeOut" }}
->
-  <img src="/logo.png" alt="Software Design UK Logo" className="mx-auto h-60 mb-6" />
-  <h1 className="text-4xl font-bold text-gray-800 mb-2">Software Design UK</h1>
-  <p className="text-lg text-gray-600 max-w-xl mx-auto">
-    Practical insights and commentary on system design, cloud computing, AI in analysis & design,
-    and documentation standards — from a Business Systems Analyst's point of view.
-  </p>
-</motion.section>
-
-
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {posts.map((post: PostType) => (
-        <div key={post.id} className="p-4 border rounded-lg shadow-md bg-white">
-          <h2 className="text-xl font-bold mb-2">
-            <Link to={`/post/${post.id}`} className="text-blue-600 hover:underline">{post.title}</Link>
-          </h2>
-          <p className="text-gray-700">{post.excerpt}</p>
-        </div>
-      ))}
-    </div>
-  </main>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+    {posts.map((post: PostType) => (
+      <Card key={post.id} className="p-4">
+        <h2 className="text-xl font-bold mb-2">
+          <Link to={`/post/${post.id}`}>{post.title}</Link>
+        </h2>
+        <p className="text-gray-700">{post.excerpt}</p>
+      </Card>
+    ))}
+  </div>
 );
 
-// Individual post page
 const Post: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const post = posts.find((p: PostType) => p.id === id);
-
-  if (!post) {
-    return <div className="p-4">Post not found</div>;
-  }
+  if (!post) return <div className="p-4">Post not found</div>;
 
   return (
-    <article className="p-4">
+    <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">{post.title}</h1>
-      <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
-    </article>
+      <div
+        className="prose max-w-none"
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      />
+    </div>
   );
 };
 
-// About page
-const About: React.FC = () => (
-  <div className="p-4">
-    <h1 className="text-2xl font-bold mb-4">About</h1>
-    <p className="text-gray-700">
-      Software Design UK is a personal platform by Alan McLeod, sharing insights on modern system architecture, cloud
-      technologies, and analytical practices in IT. The site aims to provide clean, practical knowledge from real-world
-      experience.
-    </p>
-  </div>
-);
-
-// Contact page
-const Contact: React.FC = () => (
-  <div className="p-4">
-    <h1 className="text-2xl font-bold mb-4">Contact Us</h1>
-    <p className="text-gray-700">You can reach out via email at <a href="mailto:contact@software-design-uk.com" className="text-blue-600 underline">contact@software-design-uk.com</a>.</p>
-  </div>
-);
-
-// Root app component with routing
 const App: React.FC = () => (
   <Router>
     <div className="max-w-4xl mx-auto">
-      <header className="p-4 bg-white border-b mb-4">
-        <nav className="flex justify-between items-center">
-          <Link to="/">
-            <img src="/logo.png" alt="Logo" className="h-20" />
-          </Link>
-          <ul className="flex space-x-4 text-lg font-medium">
-            <li><Link to="/" className="text-gray-700 hover:text-blue-600">Home</Link></li>
-            <li><Link to="/about" className="text-gray-700 hover:text-blue-600">About</Link></li>
-            <li><Link to="/contact" className="text-gray-700 hover:text-blue-600">Contact Us</Link></li>
-          </ul>
-        </nav>
+      <header className="p-4 bg-gray-900 text-white text-center text-2xl font-semibold">
+        <Link to="/">Software Design UK</Link>
       </header>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/post/:id" element={<Post />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
       </Routes>
     </div>
   </Router>
