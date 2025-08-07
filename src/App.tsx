@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Link, useParams } from "react-router-dom";
-import { Card } from "@/components/ui/card";
+import { Card } from "./components/ui/card";
+
 
 export type PostType = {
   id: string;
