@@ -1,25 +1,31 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import './index.css'
-import Navbar from './components/Navbar'
-import Home from './pages/Home'
-import About from './pages/About'
-import Blog from './pages/Blog'
-import Contact from './pages/Contact'
+// main.tsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Blog from "./pages/Blog";
+import "./index.css";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+import ArtOfBalancingTradeoffs from "./pages/posts/ArtOfBalancingTradeoffs";
+import CICDCloudSuperpower from "./pages/posts/CICDCloudSuperpower";
+import LLMsRequirementsGathering from "./pages/posts/LLMsRequirementsGathering";
+
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Router>
       <Navbar />
-      <main className="max-w-5xl mx-auto">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/blog" element={<Blog />} />
+      </Routes>
+      <Footer />
     </Router>
   </React.StrictMode>
-)
+);
