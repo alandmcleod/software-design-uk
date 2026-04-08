@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}{{ site.name }} | Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Independent technology thinking</p>
+      <h1>Design clearer software systems with fewer expensive surprises.</h1>
+      <p class="lead">{{ site.tagline }}</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="{{ url_for('contact') }}">Start a conversation</a>
+        <a class="button button-secondary" href="{{ url_for('blog') }}">Read the blog</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hero-card">
+        <p class="card-label">Focus areas</p>
+        <ul class="signal-list">
+          <li>Solution design for delivery teams</li>
+          <li>Requirements shaping with AI support</li>
+          <li>Cloud architecture and integration clarity</li>
+        </ul>
+      </div>
+      <div class="hero-orb hero-orb-a"></div>
+      <div class="hero-orb hero-orb-b"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <p class="eyebrow">Services</p>
+      <h2>Practical help where architecture meets delivery</h2>
+    </div>
+    <div class="card-grid">
+      {% for service in services %}
+      <article class="content-card">
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.summary }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-muted">
+  <div class="container">
+    <div class="section-heading">
+      <p class="eyebrow">Latest writing</p>
+      <h2>Short reads on architecture, analysis, and AI</h2>
+    </div>
+    <div class="card-grid">
+      {% for post in posts %}
+      <article class="post-card">
+        <p class="meta">{{ post.read_time }}</p>
+        <h3><a href="{{ url_for('post', slug=post.slug) }}">{{ post.title }}</a></h3>
+        <p>{{ post.excerpt }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

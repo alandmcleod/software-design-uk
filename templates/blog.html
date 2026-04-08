@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}{{ site.name }} | Blog{% endblock %}
+
+{% block content %}
+<section class="page-intro">
+  <div class="container">
+    <p class="eyebrow">Blog</p>
+    <h1>Notes on software design, delivery, and AI-assisted analysis.</h1>
+    <div class="post-list">
+      {% for post in posts %}
+      <article class="post-card post-card-wide">
+        <p class="meta">{{ post.read_time }}</p>
+        <h2><a href="{{ url_for('post', slug=post.slug) }}">{{ post.title }}</a></h2>
+        <p>{{ post.excerpt }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

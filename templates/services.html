@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ site.name }} | Services{% endblock %}
+
+{% block content %}
+<section class="page-intro">
+  <div class="container">
+    <p class="eyebrow">Services</p>
+    <h1>Support for teams shaping systems before delivery costs rise.</h1>
+    <div class="card-grid">
+      {% for service in services %}
+      <article class="content-card">
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.summary }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

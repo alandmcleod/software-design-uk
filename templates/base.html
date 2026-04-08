@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ site.description }}">
+  <title>{% block title %}{{ site.name }}{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="{{ url_for('home') }}">
+          <img src="{{ url_for('static', filename='images/logo-mark.svg') }}" alt="" class="brand-mark">
+          <span class="brand-text">
+            <strong>{{ site.name }}</strong>
+            <span>Architecture, analysis, and AI thinking</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          {% for item in nav_items %}
+          <a href="{{ url_for(item.endpoint) }}">{{ item.label }}</a>
+          {% endfor %}
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <p class="footer-title">{{ site.name }}</p>
+          <p>{{ site.tagline }}</p>
+        </div>
+        <div>
+          <p class="footer-title">Get in touch</p>
+          <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
