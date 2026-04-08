@@ -149,10 +149,14 @@ img {
 }
 
 .hero-copy h1,
-.page-intro h1,
 .article-body h1 {
   font-size: clamp(2.8rem, 7vw, 5.2rem);
   max-width: 12ch;
+}
+
+.page-intro h1 {
+  font-size: clamp(2.2rem, 4.8vw, 3.6rem);
+  max-width: 15ch;
 }
 
 .lead {
@@ -212,6 +216,20 @@ img {
   z-index: 2;
 }
 
+.hero-card-link {
+  display: block;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.hero-card-link:hover {
+  transform: translateY(-4px);
+  border-color: rgba(15, 118, 110, 0.35);
+  box-shadow: 0 28px 64px rgba(33, 37, 41, 0.16);
+}
+
 .card-label,
 .eyebrow {
   text-transform: uppercase;
@@ -232,6 +250,15 @@ img {
   padding-left: 1rem;
   border-left: 3px solid var(--highlight);
   line-height: 1.5;
+}
+
+.hero-card-cta {
+  display: inline-flex;
+  margin-top: 1.2rem;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--accent-strong);
 }
 
 .hero-orb {
@@ -395,9 +422,12 @@ img {
   }
 
   .hero-copy h1,
-  .page-intro h1,
   .article-body h1 {
     font-size: 2.6rem;
+  }
+
+  .page-intro h1 {
+    font-size: 2.2rem;
   }
 
   .content-card,
