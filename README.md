@@ -26,6 +26,25 @@ Netlify uses:
 ## Project structure
 
 - `app.py` contains the Flask routes
-- `site_data.py` contains shared site content
+- `site_data.py` contains shared site content and loads Markdown posts
 - `templates/` contains the HTML templates
 - `static/` contains CSS and images
+- `content/posts/` contains the blog articles in Markdown
+
+## Adding a new article
+
+Create a new Markdown file in `content/posts/` with a front matter block like this:
+
+```md
+---
+slug: example-post
+title: Example Post
+excerpt: Short summary for the blog listing page.
+read_time: 4 min read
+intro: Short intro shown at the top of the article page.
+---
+
+## First section
+
+Your article content goes here.
+```

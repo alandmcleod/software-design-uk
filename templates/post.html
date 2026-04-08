@@ -8,12 +8,7 @@
     <p class="eyebrow">{{ post.read_time }}</p>
     <h1>{{ post.title }}</h1>
     <p class="lead">{{ post.intro }}</p>
-    {% for section in post.sections %}
-    <section class="article-section">
-      <h2>{{ section.heading }}</h2>
-      <p>{{ section.body }}</p>
-    </section>
-    {% endfor %}
+    <div class="markdown-body">{{ post.content_html | safe }}</div>
   </div>
 </article>
 {% endblock %}

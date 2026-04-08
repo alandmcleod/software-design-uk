@@ -1,3 +1,12 @@
+from pathlib import Path
+
+import markdown
+
+
+BASE_DIR = Path(__file__).parent
+POSTS_DIR = BASE_DIR / "content" / "posts"
+
+
 SITE = {
     "name": "Software Design UK",
     "tagline": "Systems analysis, architecture thinking, and practical AI guidance for organisations that want clarity before they scale.",
@@ -35,92 +44,43 @@ SERVICES = [
 ]
 
 
-POSTS = [
-    {
-        "slug": "balancing-tradeoffs-in-system-design",
-        "title": "Balancing Trade-offs in System Design",
-        "excerpt": "Good architecture is rarely about perfect choices. It is about choosing the right compromise for the context.",
-        "read_time": "4 min read",
-        "intro": "Strong system design comes from making decisions that stay legible under pressure.",
-        "sections": [
-            {
-                "heading": "Performance vs scalability",
-                "body": (
-                    "A single fast service can feel like the right answer early on, but growth changes the shape of the problem. "
-                    "Architectures that tolerate distribution and failure often outperform 'fast' designs over the lifetime of a system."
-                ),
-            },
-            {
-                "heading": "Simplicity vs flexibility",
-                "body": (
-                    "Highly flexible solutions can become expensive to operate and difficult to explain. "
-                    "A simpler pattern with clear boundaries is usually easier to evolve when real requirements arrive."
-                ),
-            },
-            {
-                "heading": "What to document",
-                "body": (
-                    "Capture the context, the options considered, and why one route was selected. "
-                    "That reasoning is what helps future teams maintain momentum."
-                ),
-            },
-        ],
-    },
-    {
-        "slug": "ci-cd-as-a-cloud-superpower",
-        "title": "Why CI/CD Is a Cloud Superpower",
-        "excerpt": "Cloud platforms provide infrastructure on demand, but delivery pipelines turn that flexibility into a repeatable operating model.",
-        "read_time": "3 min read",
-        "intro": "Continuous delivery reduces fear. That matters just as much as speed.",
-        "sections": [
-            {
-                "heading": "Consistency creates confidence",
-                "body": (
-                    "When environments are built and deployed the same way every time, teams spend less energy debugging drift and more time shipping."
-                ),
-            },
-            {
-                "heading": "Recovery becomes routine",
-                "body": (
-                    "Smaller releases, automated checks, and predictable rollback paths make change less risky. "
-                    "That changes the culture around delivery."
-                ),
-            },
-            {
-                "heading": "Pipeline thinking",
-                "body": (
-                    "The strongest pipelines treat infrastructure, application code, and quality gates as part of one joined-up system."
-                ),
-            },
-        ],
-    },
-    {
-        "slug": "llms-for-requirements-gathering",
-        "title": "How LLMs Can Support Requirements Gathering",
-        "excerpt": "AI can help analysts move faster, surface assumptions earlier, and structure discovery without replacing human judgement.",
-        "read_time": "4 min read",
-        "intro": "LLMs are most useful when they sharpen thinking instead of pretending to be the final answer.",
-        "sections": [
-            {
-                "heading": "Useful starting points",
-                "body": (
-                    "Drafting stakeholder questions, decomposing large requests, and summarising meeting notes are all good tasks for assisted analysis."
-                ),
-            },
-            {
-                "heading": "Where caution matters",
-                "body": (
-                    "Generated output still needs challenge and validation. "
-                    "Analysts should treat AI as a collaborator for exploration, not as an authority."
-                ),
-            },
-            {
-                "heading": "A practical mindset",
-                "body": (
-                    "The real opportunity is not replacing workshops or critical thinking. "
-                    "It is reducing blank-page effort so more time goes into sharper conversations."
-                ),
-            },
-        ],
-    },
-]
+def parse_front_matter(raw_text: str) -> tuple[dict[str, str], str]:
+    if not raw_text.startswith("---"):
+        raise ValueError("Post is missing front matter block.")
+
+    _, front_matter, content = raw_text.split("---", 2)
+    metadata: dict[str, str] = {}
+
+    for line in front_matter.strip().splitlines():
+        if not line.strip():
+            continue
+        key, _, value = line.partition(":")
+        metadata[key.strip()] = value.strip()
+
+    return metadata, content.strip()
+
+
+def load_post(path: Path) -> dict[str, str]:
+    metadata, content = parse_front_matter(path.read_text(encoding="utf-8"))
+    slug = metadata.get("slug", path.stem)
+
+    required_keys = ["title", "excerpt", "read_time", "intro"]
+    missing = [key for key in required_keys if not metadata.get(key)]
+    if missing:
+        raise ValueError(f"Post '{path.name}' is missing metadata: {', '.join(missing)}")
+
+    return {
+        "slug": slug,
+        "title": metadata["title"],
+        "excerpt": metadata["excerpt"],
+        "read_time": metadata["read_time"],
+        "intro": metadata["intro"],
+        "content_html": markdown.markdown(content, extensions=["extra", "sane_lists"]),
+    }
+
+
+def load_posts() -> list[dict[str, str]]:
+    return [load_post(path) for path in sorted(POSTS_DIR.glob("*.md"))]
+
+
+POSTS = load_posts()
