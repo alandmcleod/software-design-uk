@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ site.name }} | Contact{% endblock %}
+
+{% block content %}
+<section class="page-intro">
+  <div class="container narrow">
+    <p class="eyebrow">Contact</p>
+    <h1>Let's talk about the shape of your next system</h1>
+    <p class="lead">
+      If you need a clearer view of architecture options, delivery trade-offs, or how AI can support analysis,
+      send a note and we can take it from there.
+    </p>
+    <div class="contact-panel">
+      <p>Email</p>
+      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

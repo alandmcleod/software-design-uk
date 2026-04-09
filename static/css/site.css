@@ -24,9 +24,12 @@ body {
   font-family: "Manrope", "Segoe UI", sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at top left, rgba(245, 158, 11, 0.18), transparent 28%),
-    radial-gradient(circle at 85% 12%, rgba(15, 118, 110, 0.16), transparent 22%),
-    linear-gradient(180deg, #fcfaf6 0%, var(--bg) 100%);
+    linear-gradient(rgba(30, 36, 48, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 36, 48, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 15% 12%, rgba(245, 158, 11, 0.12), transparent 20%),
+    radial-gradient(circle at 82% 10%, rgba(15, 118, 110, 0.11), transparent 24%),
+    linear-gradient(180deg, #fdfaf4 0%, #f0ece2 100%);
+  background-size: 36px 36px, 36px 36px, auto, auto, auto;
 }
 
 a {
@@ -143,9 +146,10 @@ img {
 .post-card h2,
 .post-card h3,
 .content-card h3 {
-  font-family: "Fraunces", Georgia, serif;
+  font-family: "Newsreader", "Fraunces", Georgia, serif;
   line-height: 1.05;
   margin: 0;
+  letter-spacing: -0.02em;
 }
 
 .hero-copy h1 {
@@ -156,6 +160,8 @@ img {
 .page-intro h1 {
   font-size: clamp(1.55rem, 3.35vw, 2.5rem);
   max-width: 15ch;
+  font-family: "Newsreader", Georgia, serif;
+  font-weight: 500;
 }
 
 .article-body h1 {
@@ -208,6 +214,17 @@ img {
   min-height: 440px;
   display: grid;
   place-items: center;
+}
+
+.hero-diagram {
+  position: absolute;
+  inset: 2rem 0.4rem 0.4rem 2.2rem;
+  border-radius: 32px;
+  border: 1px solid rgba(30, 36, 48, 0.1);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.14)),
+    linear-gradient(180deg, rgba(15, 118, 110, 0.08), rgba(11, 79, 90, 0.04));
+  overflow: hidden;
 }
 
 .hero-card,
@@ -272,26 +289,91 @@ img {
   color: var(--accent-strong);
 }
 
-.hero-orb {
+.hero-grid-lines,
+.hero-link,
+.hero-node,
+.hero-chip {
   position: absolute;
+}
+
+.hero-grid-lines {
+  inset: 0;
+  background:
+    linear-gradient(rgba(15, 118, 110, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 118, 110, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.hero-node {
+  width: 16px;
+  height: 16px;
   border-radius: 999px;
-  filter: blur(2px);
+  border: 3px solid rgba(255, 255, 255, 0.88);
+  box-shadow: 0 0 0 6px rgba(30, 36, 48, 0.06);
 }
 
-.hero-orb-a {
-  width: 220px;
-  height: 220px;
-  background: linear-gradient(135deg, rgba(15, 118, 110, 0.7), rgba(15, 118, 110, 0.1));
-  top: 1rem;
-  right: 0;
+.hero-node-a {
+  top: 72px;
+  left: 68px;
+  background: #0f766e;
 }
 
-.hero-orb-b {
+.hero-node-b {
+  top: 128px;
+  right: 92px;
+  background: #f59e0b;
+}
+
+.hero-node-c {
+  bottom: 100px;
+  left: 126px;
+  background: #1e2430;
+}
+
+.hero-node-d {
+  bottom: 64px;
+  right: 66px;
+  background: #0f766e;
+}
+
+.hero-link {
+  height: 2px;
+  transform-origin: left center;
+  background: linear-gradient(90deg, rgba(15, 118, 110, 0.72), rgba(245, 158, 11, 0.42));
+}
+
+.hero-link-a {
+  top: 79px;
+  left: 82px;
   width: 180px;
-  height: 180px;
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.65), rgba(245, 158, 11, 0.12));
-  bottom: 1rem;
-  left: 1rem;
+  transform: rotate(18deg);
+}
+
+.hero-link-b {
+  top: 142px;
+  left: 136px;
+  width: 154px;
+  transform: rotate(132deg);
+}
+
+.hero-link-c {
+  bottom: 74px;
+  left: 140px;
+  width: 160px;
+  transform: rotate(-9deg);
+}
+
+.hero-chip {
+  right: 22px;
+  bottom: 22px;
+  padding: 0.55rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(30, 36, 48, 0.12);
+  background: rgba(255, 253, 249, 0.86);
+  color: var(--ink);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
 }
 
 .section-muted {
