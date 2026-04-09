@@ -79,20 +79,26 @@ img {
 }
 
 .brand-mark {
-  width: 3rem;
-  height: 3rem;
+  width: 3.9rem;
+  height: 3.9rem;
   flex: 0 0 auto;
 }
 
 .brand-text {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: 0.08rem;
 }
 
 .brand-text strong {
-  font-size: 1rem;
-  letter-spacing: 0.02em;
+  font-family: "Orbitron", "Manrope", sans-serif;
+  font-size: 1.42rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 0.98;
+  text-transform: uppercase;
+  color: #2d9ccb;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
 .brand-text span,
@@ -104,7 +110,11 @@ img {
 }
 
 .brand-text span {
-  font-size: 0.84rem;
+  font-family: "Orbitron", "Manrope", sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #b3b8bf;
 }
 
 .site-nav {
@@ -211,20 +221,25 @@ img {
 
 .hero-panel {
   position: relative;
-  min-height: 440px;
+  min-height: auto;
   display: grid;
-  place-items: center;
+  grid-template-columns: 1fr;
+  align-content: start;
+  gap: 1rem;
 }
 
 .hero-diagram {
-  position: absolute;
-  inset: 2rem 0.4rem 0.4rem 2.2rem;
+  position: relative;
+  width: min(100%, 420px);
+  min-height: 260px;
   border-radius: 32px;
   border: 1px solid rgba(30, 36, 48, 0.1);
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.14)),
     linear-gradient(180deg, rgba(15, 118, 110, 0.08), rgba(11, 79, 90, 0.04));
   overflow: hidden;
+  z-index: 1;
+  justify-self: start;
 }
 
 .hero-card,
@@ -242,6 +257,7 @@ img {
   padding: 1.6rem;
   border-radius: 28px;
   z-index: 2;
+  justify-self: start;
 }
 
 .hero-card-link {
@@ -574,7 +590,8 @@ img {
   }
 
   .hero-panel {
-    min-height: 320px;
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 
